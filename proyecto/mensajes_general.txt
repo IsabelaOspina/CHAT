@@ -1,0 +1,33 @@
+juan: hola
+isa: hola
+[2025-05-15 22:01:08] (general) isa: hola
+[2025-05-15 22:40:20] [general] juan: hola
+[2025-05-15 22:41:20] [general] isa: holis
+[2025-05-15 22:48:24] [general] isa: ojala funcione
+[2025-05-15 22:48:54] [general] juan: pues no
+[2025-05-15 22:53:05] [general] juancito: hola espero que funcione
+[2025-05-15 22:53:20] [general] isa: hola juan
+[2025-05-15 22:53:33] [general] juancito: hola isa
+[2025-05-15 22:55:53] [general] isa: hola juan
+[2025-05-15 22:56:07] [general] juan: hola isa
+[2025-05-16 09:26:59] [general] juan: hola
+[2025-05-16 09:27:13] [general] isa: hola como estas
+[2025-05-16 09:29:39] [general] isa: Luis
+[2025-05-16 09:30:17] [general] juan: isa
+[2025-05-16 09:50:49] [general] juan: hola
+[2025-05-16 09:51:04] [general] isa: hola juan
+[2025-05-16 09:52:07] [general] isa: Hola T2
+[2025-05-16 09:52:21] [general] juan: HolaT1
+[2025-05-16 10:17:47] [general] isa: hola
+[2025-05-16 10:46:48] [general] isa: hola 1
+[2025-05-16 11:10:29] [general] juan: hola
+[2025-05-16 11:10:48] [general] isa: hola 2
+[2025-05-16 11:19:25] [general] juan: hola 33
+[2025-05-16 11:19:36] [general] isa: hol 22
+[2025-05-16 11:28:53] [general] juan: hola1234
+[2025-05-16 11:29:16] [general] isa: hola 7575757575
+[2025-05-16 11:35:37] [general] isa: hola 2245
+[2025-05-16 11:35:47] [general] juan: eyeyeye
+[2025-05-16 11:37:15] [general] isa: ororor
+[2025-05-16 11:48:31] [general] isa: hola 1
+[2025-05-16 11:48:38] [general] juan: hola 2
