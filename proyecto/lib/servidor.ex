@@ -33,26 +33,40 @@ defmodule Proyecto.Servidor do
     end
   end
 
-  # Unirse a sala
+  # Unirse a sala (modificado para soportar usuarios sin sala y que la sala nunca se borre)
   def handle_call({:entrar_sala, nombre, nombre_sala}, _from, state) do
     if not Map.has_key?(state.salas, nombre_sala) do
       {:reply, {:error, "La sala #{nombre_sala} no existe"}, state}
     else
       sala_anterior = state.usuarios[nombre][:sala]
-      # Quitar usuario de la sala anterior
       salas =
-        state.salas
-        |> Map.update!(sala_anterior, fn lista -> List.delete(lista, nombre) end)
-        |> Map.update!(nombre_sala, fn lista -> [nombre | lista] end)
+        case sala_anterior do
+          nil ->
+            # El usuario no estaba en ninguna sala, solo lo agregamos a la nueva
+            Map.update!(state.salas, nombre_sala, fn lista -> [nombre | lista] end)
+          ^nombre_sala ->
+            # Ya está en la sala, no hacemos nada
+            state.salas
+          _ ->
+            # Lo quitamos de la sala anterior y lo agregamos a la nueva
+            state.salas
+            |> Map.update!(sala_anterior, fn lista -> List.delete(lista, nombre) end)
+            |> Map.update!(nombre_sala, fn lista -> [nombre | lista] end)
+        end
       usuarios = Map.update!(state.usuarios, nombre, &Map.put(&1, :sala, nombre_sala))
       {:reply, :ok, %{state | usuarios: usuarios, salas: salas}}
     end
   end
 
-  # Abandonar sala (opcional)
+  # Abandonar sala (NO elimina la sala aunque quede vacía)
   def handle_call({:abandonar_sala, nombre}, _from, state) do
     sala = state.usuarios[nombre][:sala]
-    salas = update_in(state.salas[sala], fn lista -> List.delete(List.wrap(lista), nombre) end)
+    # Quitar usuario de la sala, pero NO eliminar la sala aunque quede vacía
+    salas =
+      case sala do
+        nil -> state.salas
+        _ -> Map.update!(state.salas, sala, fn lista -> List.delete(lista, nombre) end)
+      end
     usuarios = Map.update!(state.usuarios, nombre, &Map.put(&1, :sala, nil))
     {:reply, :ok, %{state | usuarios: usuarios, salas: salas}}
   end

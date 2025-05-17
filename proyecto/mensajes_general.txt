@@ -31,3 +31,6 @@ isa: hola
 [2025-05-16 11:37:15] [general] isa: ororor
 [2025-05-16 11:48:31] [general] isa: hola 1
 [2025-05-16 11:48:38] [general] juan: hola 2
+[2025-05-16 21:10:35] [general] juan: hola isa
+[2025-05-16 21:10:42] [general] isa: hola juan
+[2025-05-16 21:11:06] [general] juan: hola
