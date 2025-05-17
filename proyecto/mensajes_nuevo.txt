@@ -1,0 +1,6 @@
+[2025-05-17 18:36:00] [nuevo] nikoll: ddd
+[2025-05-17 18:36:04] [nuevo] nikoll: gggg
+[2025-05-17 18:36:08] [nuevo] nikoll: hhh
+[2025-05-17 18:48:40] [nuevo] nikoll: nuevo
+[2025-05-17 18:48:45] [nuevo] nikoll: actual
+[2025-05-17 18:48:49] [nuevo] nikoll: antiguo

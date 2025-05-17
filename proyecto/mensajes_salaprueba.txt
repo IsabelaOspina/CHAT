@@ -1,3 +1,0 @@
-[2025-05-16 21:23:28] [salaprueba] juan: hola isa
-[2025-05-16 21:23:33] [salaprueba] isa: hola juan
-[2025-05-16 21:23:45] [salaprueba] juan: hola

@@ -4,21 +4,26 @@ defmodule Proyecto.Usuario do
   @contraseñas :proyecto_contraseñas
 
   defp init_contraseñas do
-    unless :ets.whereis(@contraseñas) != :undefined do
+    if :ets.whereis(@contraseñas) == :undefined do
       :ets.new(@contraseñas, [:named_table, :set, :public])
     end
   end
 
   def crear_usuario(nombre) do
     init_contraseñas()
-    contraseña = IO.gets("Ingresa una contraseña para el usuario #{nombre}: ") |> String.trim()
-    :ets.insert(@contraseñas, {nombre, contraseña})
-    case GenServer.start_link(__MODULE__, {nombre, contraseña}, name: String.to_atom(nombre)) do
-      {:ok, _pid} ->
-        IO.puts("Usuario #{nombre} creado")
-        start(nombre)
-      {:error, reason} ->
-        IO.puts("Error al crear el usuario: #{reason}")
+    case :ets.lookup(@contraseñas, nombre) do
+      [] ->
+        contraseña = IO.gets("Ingresa una contraseña para el usuario #{nombre}: ") |> String.trim()
+        :ets.insert(@contraseñas, {nombre, contraseña})
+        case GenServer.start_link(__MODULE__, {nombre, contraseña}, name: String.to_atom(nombre)) do
+          {:ok, _pid} ->
+            IO.puts("Usuario #{nombre} creado")
+            start(nombre)
+          {:error, reason} ->
+            IO.puts("Error al crear el usuario: #{inspect(reason)}")
+        end
+      _ ->
+        IO.puts("El usuario ya existe. Usa reconectar_usuario/1 para iniciar sesión.")
     end
   end
 
@@ -32,8 +37,11 @@ defmodule Proyecto.Usuario do
             {:ok, _pid} ->
               IO.puts("Usuario #{nombre} reconectado")
               start(nombre)
+            {:error, {:already_started, _}} ->
+              IO.puts("Usuario ya conectado, usando sesión existente.")
+              start(nombre)
             {:error, reason} ->
-              IO.puts("Error al reconectar el usuario: #{reason}")
+              IO.puts("Error al reconectar el usuario: #{inspect(reason)}")
           end
         else
           IO.puts("Contraseña incorrecta.")

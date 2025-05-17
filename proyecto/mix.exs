@@ -21,6 +21,8 @@ defmodule Proyecto.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [{:phoenix_pubsub, "~> 2.1"}]
+    [{:phoenix_pubsub, "~> 2.1"},
+    {:plug_cowboy, "~> 2.0"},
+    {:jason, "~> 1.2"}] # Para trabajar con JSON
   end
 end

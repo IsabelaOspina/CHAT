@@ -1,0 +1,284 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f4f6fb;
+  margin: 0;
+  padding: 0;
+}
+
+#login, #chat {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 32px 28px 24px 28px;
+  border-radius: 14px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+}
+
+h2 {
+  margin-top: 0;
+  font-weight: 600;
+  color: #2d3748;
+  letter-spacing: 1px;
+}
+
+input[type="text"], input[type="password"] {
+  width: calc(100% - 18px);
+  margin: 8px 0;
+  padding: 10px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  font-size: 15px;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  border: 1.5px solid #3182ce;
+  outline: none;
+  background: #fff;
+}
+
+button {
+  margin: 5px 4px 5px 0;
+  padding: 8px 18px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(49,130,206,0.08);
+  background: #3182ce; /* color por defecto */
+}
+
+/* Botón registrar */
+button.registrar {
+  background: #43a047 !important;
+}
+button.registrar:hover, button.registrar:focus {
+  background: #2e7d32 !important;
+}
+
+/* Botón login */
+button.login {
+  background: #1976d2 !important;
+}
+button.login:hover, button.login:focus {
+  background: #0d47a1 !important;
+}
+
+/* Botón crear sala */
+button.crear-sala {
+  background: #8e24aa !important;
+}
+button.crear-sala:hover, button.crear-sala:focus {
+  background: #5e35b1 !important;
+}
+
+/* Botón unirse */
+button.unirse {
+  background: #fbc02d !important;
+  color: #22223b !important;
+}
+button.unirse:hover, button.unirse:focus {
+  background: #f9a825 !important;
+  color: #fff !important;
+}
+
+/* Botón abandonar */
+button.abandonar {
+  background: #e53935 !important;
+}
+button.abandonar:hover, button.abandonar:focus {
+  background: #b71c1c !important;
+}
+
+/* Botón buscar */
+button.buscar {
+  background: #039be5 !important;
+}
+button.buscar:hover, button.buscar:focus {
+  background: #0277bd !important;
+}
+
+/* Botón historial */
+button.historial {
+  background: #757575 !important;
+}
+button.historial:hover, button.historial:focus {
+  background: #424242 !important;
+}
+
+/* Botón usuarios conectados */
+button.usuarios {
+  background: #00897b !important;
+}
+button.usuarios:hover, button.usuarios:focus {
+  background: #00695c !important;
+}
+
+/* Botón enviar */
+button.enviar {
+  background: #43a047 !important;
+  color: #fff !important;
+}
+button.enviar:hover, button.enviar:focus {
+  background: #2e7d32 !important;
+  color: #fff !important;
+}
+
+/* Botón salir/logout */
+button.logout {
+  background: #bdbdbd !important;
+  color: #22223b !important;
+}
+button.logout:hover, button.logout:focus {
+  background: #757575 !important;
+  color: #fff !important;
+}
+
+#usuarios {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+#usuarios li {
+  margin: 2px 0;
+  color: #374151;
+  font-size: 14px;
+}
+
+#mensajes {
+  border: 1px solid #e2e8f0;
+  height: 200px;
+  overflow-y: auto;
+  margin: 14px 0 10px 0;
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 12px 10px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#mensajes div {
+  background: #e3e8f0;
+  color: #22223b;
+  border-radius: 8px;
+  padding: 7px 12px;
+  margin-bottom: 2px;
+  max-width: 85%;
+  word-break: break-word;
+  box-shadow: 0 1px 2px rgba(49,130,206,0.04);
+}
+
+#mensajes div:nth-child(even) {
+  background: #c7d2fe;
+  align-self: flex-end;
+}
+
+#mensaje {
+  width: calc(100% - 110px);
+  margin-right: 8px;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+#modal-busqueda {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-busqueda[style*="flex"] {
+  display: flex !important;
+}
+
+#modal-busqueda > div {
+  background: #fff;
+  padding: 36px 32px 28px 32px;
+  border-radius: 16px;
+  max-width: 650px;
+  min-width: 320px;
+  min-height: 180px;
+  max-height: 85vh;
+  overflow: auto;
+  position: relative;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+#modal-busqueda h3 {
+  margin-top: 0;
+  color: #2563eb;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+#resultados-busqueda {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #22223b;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#resultados-busqueda div {
+  background: #e3e8f0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 0;
+  word-break: break-word;
+  font-size: 15px;
+  box-shadow: 0 1px 2px rgba(49,130,206,0.04);
+}
+
+#modal-busqueda button {
+  background: #e53e3e;
+  color: #fff;
+  font-size: 14px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  box-shadow: none;
+}
+
+#modal-busqueda button:hover {
+  background: #c53030;
+}
+
+#login-msg {
+  color: #e53e3e;
+  margin-top: 8px;
+  font-size: 14px;
+  min-height: 18px;
+}
+
+@media (max-width: 600px) {
+  #login, #chat {
+    max-width: 98vw;
+    padding: 12px 4vw 12px 4vw;
+  }
+}
+
+@media (max-width: 700px) {
+  #modal-busqueda > div {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 16px 4vw 12px 4vw;
+  }
+}
