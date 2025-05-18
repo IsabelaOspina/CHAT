@@ -5,3 +5,6 @@
 [2025-05-17 21:15:55] [sala_prueba] Isabela: estoy en sala prueba
 [2025-05-17 21:31:11] [sala_prueba] Juan: hola soy juan 
 [2025-05-17 21:32:09] [sala_prueba] Salome: hola como estas
+[2025-05-18 17:21:19] [sala_prueba] Isabela: hola
+[2025-05-18 17:22:04] [sala_prueba] pepito perez: hola como estas
+[2025-05-18 17:23:55] [sala_prueba] Sebas: Hola bien 
