@@ -34,3 +34,5 @@ isa: hola
 [2025-05-16 21:10:35] [general] juan: hola isa
 [2025-05-16 21:10:42] [general] isa: hola juan
 [2025-05-16 21:11:06] [general] juan: hola
+[2025-05-17 21:15:11] [general] Sebastian: hola es en general
+[2025-05-17 21:15:43] [general] Papito: tambien entre a general 

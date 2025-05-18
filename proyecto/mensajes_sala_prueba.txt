@@ -1,0 +1,7 @@
+[2025-05-17 21:06:01] [sala_prueba] Isabela: hoa
+[2025-05-17 21:07:21] [sala_prueba] Papito: hola soy pepito 
+[2025-05-17 21:08:40] [sala_prueba] Isabela: hola pepito
+[2025-05-17 21:11:53] [sala_prueba] Salome: hola soy salome
+[2025-05-17 21:15:55] [sala_prueba] Isabela: estoy en sala prueba
+[2025-05-17 21:31:11] [sala_prueba] Juan: hola soy juan 
+[2025-05-17 21:32:09] [sala_prueba] Salome: hola como estas
