@@ -1,0 +1,4 @@
+[2025-05-18 13:19:13] [hola] Sofía: Hola
+[2025-05-18 13:19:22] [hola] nikoll: hola
+[2025-05-18 13:19:27] [hola] Sofía: Adiós 
+[2025-05-18 13:19:38] [hola] nikoll: adios

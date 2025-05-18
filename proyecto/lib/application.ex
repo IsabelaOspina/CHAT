@@ -17,7 +17,11 @@ defmodule Proyecto.Application do
     children = [
       Proyecto.Servidor,
         Proyecto.ContrasenaStorage,
-      {Plug.Cowboy, scheme: :http, plug: Proyecto.API, options: [port: 4000]}
+      {Plug.Cowboy, scheme: :http, plug: Proyecto.API,options: [
+        ip: {0, 0, 0, 0},   # 👈 Escucha en todas las interfaces
+        port: 4000
+      ]}
+
     ]
 
     opts = [strategy: :one_for_one, name: Proyecto.Supervisor]

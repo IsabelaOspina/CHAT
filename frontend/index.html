@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="login">
+  <div id="login"  style="max-width:500px;">
     <h2>Iniciar sesión / Registrarse</h2>
     <input type="text" id="nombre" placeholder="Usuario">
     <input type="password" id="contraseña" placeholder="Contraseña">
@@ -22,59 +22,62 @@
     </button>
     <div id="login-msg"></div>
   </div>
-  <div id="chat" style="display:none;">
-    <h2>Chat</h2>
-    <div>
-      <input type="text" id="sala" placeholder="Sala">
-      <button class="crear-sala" onclick="crearSala()">
-        <!-- Icono crear sala -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M10 6v8M6 10h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-        Crear sala
-      </button>
-      <button class="unirse" onclick="unirseSala()">
-        <!-- Icono unirse -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M7 10h6M10 7v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-        Unirse
-      </button>
-      <button class="abandonar" onclick="abandonarSala()">
-        <!-- Icono salir sala -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M13 7l-6 6M7 7l6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-        Abandonar
-      </button>
+  <div id="chat" style="display:none; max-width:900px;">
+    <h2 style="margin-bottom: 18px;">Chat</h2>
+    <div style="display: flex; flex-direction: row; align-items: flex-start; gap: 28px;">
+      <div style="flex: 1 1 240px; min-width: 180px;">
+        <input type="text" id="sala" placeholder="Sala">
+        <button class="crear-sala" onclick="crearSala()">
+          <!-- Icono crear sala -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M10 6v8M6 10h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Crear sala
+        </button>
+        <button class="unirse" onclick="unirseSala()">
+          <!-- Icono unirse -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M7 10h6M10 7v6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Unirse
+        </button>
+        <button class="abandonar" onclick="abandonarSala()">
+          <!-- Icono salir sala -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M13 7l-6 6M7 7l6 6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Abandonar
+        </button>
+        <input type="text" id="buscar-palabra" placeholder="Buscar palabra">
+        <button class="buscar" onclick="buscarMensajes()">
+          <!-- Icono buscar -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="9" cy="9" r="6" stroke="#fff" stroke-width="2"/><path d="M15 15l-3-3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Buscar
+        </button>
+        <button class="historial" onclick="verHistorial()">
+          <!-- Icono historial -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M10 6v4l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+          Historial
+        </button>
+        <button class="usuarios" onclick="listarUsuarios()">
+          <!-- Icono usuarios -->
+          <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="7" cy="8" r="3" stroke="#fff" stroke-width="2"/><circle cx="13" cy="8" r="3" stroke="#fff" stroke-width="2"/><path d="M2 16c0-2.2091 2.6863-4 6-4s6 1.7909 6 4" stroke="#fff" stroke-width="2"/></svg>
+          Usuarios conectados
+        </button>
+        <ul id="usuarios"></ul>
+      </div>
+      <div style="flex: 3 1 0; min-width: 0;">
+        <div id="nombre-sala" style="font-weight:bold; font-size:19px; color:#1976d2; text-align:right; margin-bottom:10px; min-height:22px;"></div>
+        <div id="mensajes"></div>
+        <div style="display:flex; align-items:center; margin-top:10px;">
+          <input type="text" id="mensaje" placeholder="Escribe tu mensaje" style="flex:1;">
+          <button class="enviar" onclick="enviarMensaje()" style="margin-left:8px;">
+            <!-- Icono enviar -->
+            <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><path d="M2 10l16-6-6 16-2-7-7-2z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
+            Enviar
+          </button>
+          <button class="logout" onclick="logout()" style="margin-left:8px;">
+            <!-- Icono logout -->
+            <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><path d="M7 10h6M10 7l4 3-4 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="3" width="8" height="14" rx="2" stroke="#fff" stroke-width="2"/></svg>
+            Salir
+          </button>
+        </div>
+      </div>
     </div>
-    <div>
-      <input type="text" id="buscar-palabra" placeholder="Buscar palabra">
-      <button class="buscar" onclick="buscarMensajes()">
-        <!-- Icono buscar -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="9" cy="9" r="6" stroke="#fff" stroke-width="2"/><path d="M15 15l-3-3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-        Buscar
-      </button>
-      <button class="historial" onclick="verHistorial()">
-        <!-- Icono historial -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="2"/><path d="M10 6v4l3 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-        Historial
-      </button>
-    </div>
-    <div>
-      <button class="usuarios" onclick="listarUsuarios()">
-        <!-- Icono usuarios -->
-        <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><circle cx="7" cy="8" r="3" stroke="#fff" stroke-width="2"/><circle cx="13" cy="8" r="3" stroke="#fff" stroke-width="2"/><path d="M2 16c0-2.2091 2.6863-4 6-4s6 1.7909 6 4" stroke="#fff" stroke-width="2"/></svg>
-        Usuarios conectados
-      </button>
-      <ul id="usuarios"></ul>
-    </div>
-    <div id="mensajes"></div>
-    <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
-    <button class="enviar" onclick="enviarMensaje()">
-      <!-- Icono enviar -->
-      <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><path d="M2 10l16-6-6 16-2-7-7-2z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>
-      Enviar
-    </button>
-    <button class="logout" onclick="logout()">
-      <!-- Icono logout -->
-      <svg width="16" height="16" fill="none" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:5px;"><path d="M7 10h6M10 7l4 3-4 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="3" width="8" height="14" rx="2" stroke="#fff" stroke-width="2"/></svg>
-      Salir
-    </button>
   </div>
   <div id="modal-busqueda" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
     <div style="background:#fff; padding:20px; border-radius:8px; max-width:500px; max-height:80vh; overflow:auto; position:relative;">

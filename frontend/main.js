@@ -9,6 +9,8 @@ function mostrarChat() {
   intervalo = setInterval(() => {
     if (usuario.sala) verHistorial(true);
   }, 1000);
+  // Mostrar nombre de la sala si existe
+  actualizarNombreSala();
   // Quitar localStorage: no guardar usuario registrado
 }
 
@@ -122,9 +124,10 @@ function unirseSala() {
       if (data.ok) {
         usuario.sala = sala;
         document.getElementById('mensajes').innerHTML = '';
-        // Asegúrate de cerrar el modal de búsqueda si está abierto
         cerrarModalBusqueda();
+        actualizarNombreSala();
         verHistorial(true);
+        listarUsuarios(); // Actualiza la lista de usuarios conectados
       } else {
         alert(data.error);
       }
@@ -142,6 +145,8 @@ function abandonarSala() {
       if (data.ok) {
         usuario.sala = null;
         document.getElementById('mensajes').innerHTML = '';
+        actualizarNombreSala();
+        listarUsuarios(); // Actualiza la lista de usuarios conectados
       } else {
         alert(data.error);
       }
@@ -156,16 +161,9 @@ function verHistorial(silent) {
   fetch(`/sala/${usuario.sala}/historial`)
     .then(r => r.json())
     .then(data => {
-      // silent será undefined si llamas verHistorial() sin argumentos,
-      // y será true si llamas verHistorial(true)
-      // Por defecto, los argumentos no pasados en JS son undefined.
-      // Si quieres que silent sea siempre booleano, usa:
-      //   if (silent === true) { ... }
-      // Así solo muestra el modal si silent no es true (es decir, solo desde el botón Historial)
-     
       const mensajes = data.historial || [];
       if (silent === true) {
-        document.getElementById('mensajes').innerHTML = mensajes.map(m => `<div>${m}</div>`).join('');
+        agregarMensajesAlChat(mensajes);
       } else {
         const modal = document.getElementById('modal-busqueda');
         const resultados = document.getElementById('resultados-busqueda');
@@ -213,7 +211,22 @@ function listarUsuarios() {
       ul.innerHTML = '';
       (data.usuarios || []).forEach(u => {
         const li = document.createElement('li');
-        li.innerText = u;
+        // Crear avatar: círculo con la inicial del usuario
+        const avatar = document.createElement('span');
+        avatar.textContent = u[0] ? u[0].toUpperCase() : '?';
+        avatar.style.display = 'inline-flex';
+        avatar.style.alignItems = 'center';
+        avatar.style.justifyContent = 'center';
+        avatar.style.width = '26px';
+        avatar.style.height = '26px';
+        avatar.style.borderRadius = '50%';
+        avatar.style.background = '#3182ce';
+        avatar.style.color = '#fff';
+        avatar.style.fontWeight = 'bold';
+        avatar.style.fontSize = '15px';
+        avatar.style.marginRight = '8px';
+        li.appendChild(avatar);
+        li.appendChild(document.createTextNode(u));
         ul.appendChild(li);
       });
     });
@@ -237,6 +250,49 @@ function logout() {
   document.getElementById('nombre').value = '';
   document.getElementById('contraseña').value = '';
   mostrarLogin();
+}
+
+function actualizarNombreSala() {
+  const nombreSalaDiv = document.getElementById('nombre-sala');
+  if (usuario.sala) {
+    nombreSalaDiv.textContent = `Sala: ${usuario.sala}`;
+  } else {
+    nombreSalaDiv.textContent = '';
+  }
+}
+
+function renderMensaje(fecha, sala, usuario, texto) {
+  // Obtiene la inicial del usuario para el icono
+  const inicial = usuario.trim().charAt(0).toUpperCase();
+  // Formatea la fecha (sin corchetes)
+  const fechaFormateada = fecha.replace(/[\[\]]/g, '');
+  // Crea el HTML del mensaje
+  return `
+    <div class="mensaje-chat">
+      <span class="fecha">${fechaFormateada}</span>
+      <span class="sala">#${sala}</span>
+      <span class="usuario">
+        <span class="usuario-icono">${inicial}</span>
+      </span>
+      <span class="texto">${texto}</span>
+    </div>
+  `;
+}
+
+function agregarMensajesAlChat(mensajes) {
+  const mensajesDiv = document.getElementById('mensajes');
+  mensajesDiv.innerHTML = '';
+  mensajes.forEach(msg => {
+    // Extrae partes usando regex
+    const match = msg.match(/^\[(.*?)\] \[(.*?)\] (.*?): (.*)$/);
+    if (match) {
+      const [, fecha, sala, usuario, texto] = match;
+      mensajesDiv.innerHTML += renderMensaje(fecha, sala, usuario, texto);
+    } else {
+      // Si no coincide, muestra el mensaje tal cual
+      mensajesDiv.innerHTML += `<div class="mensaje-chat"><span class="texto">${msg}</span></div>`;
+    }
+  });
 }
 
 // Asegura que las funciones estén disponibles globalmente para el HTML
